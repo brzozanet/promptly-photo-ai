@@ -19,7 +19,7 @@ Promptly to aplikacja webowa do rozmowy z AI (ChatGPT), dostępna online. Projek
 - **Framework**: React 18 (Vite)
 - **Styling**: TailwindCSS + Shadcn/ui (komponenty UI)
 - **State Management**: Zustand (prosty i lekki)
-- **HTTP Client**: Axios/Fetch API
+- **HTTP Client**: Fetch API (nativny)
 - **Build Tool**: Vite
 
 ### Backend (Minimalny - Proxy)
@@ -223,10 +223,11 @@ Error Response (e.g., 500):
 ## 📚 Techniczne Notatki
 
 1. **State Management**: Historia czatu będzie przechowywana lokalnie w Zustand. W Phase 1 resetuje się po refresh strony.
-2. **Streaming** (opcjonalne): Można dodać streaming odpowiedzi (SSE) zamiast czekania na całą odpowiedź.
-3. **Error Handling**: Graceful error handling z user-friendly komunikatami.
-4. **CORS**: Backend proxy musi mieć poprawnie skonfigurowany CORS dla frontendu.
-5. **Bezpieczeństwo**: API key przechowywany po stronie serwera, nigdy nie trafia do frontendu.
+2. **HTTP Client**: MVP używa Fetch API. **Axios planowany do Sprint 2+** (dodatkowy learning).
+3. **Streaming** (opcjonalne): Można dodać streaming odpowiedzi (SSE) zamiast czekania na całą odpowiedź.
+4. **Error Handling**: Graceful error handling z user-friendly komunikatami.
+5. **CORS**: Backend proxy musi mieć poprawnie skonfigurowany CORS dla frontendu.
+6. **Bezpieczeństwo**: API key przechowywany po stronie serwera, nigdy nie trafia do frontendu.
 
 ---
 
@@ -257,8 +258,16 @@ Jeśli klucz OpenAI byłby w kodzie frontend (JavaScript), każdy mógłby:
 
 ---
 
-## 🔄 Next Steps po Phase 1
+## 🔄 Next Steps - Sprint 2+
 
+**Sprint 2 (Backend)**:
+
+- Integracja z OpenAI API
+- Express proxy server
+
+**Sprint 3+ (Ulepszenia & Learning)**:
+
+- Wdrożenie Axios (zamiast Fetch API)
 - Persystencja czatów (baza danych - PostgreSQL)
 - Systemy autoryzacji (JWT)
 - Możliwość tworzenia wielu konwersacji

@@ -38,7 +38,7 @@ npm run dev
 #### Pakiety npm
 
 ```bash
-npm install zustand axios
+npm install zustand
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
@@ -71,7 +71,6 @@ npx shadcn-ui@latest add scroll-area
 **Czek list**:
 
 - [ ] Zustand zainstalowany
-- [ ] Axios zainstalowany
 - [ ] TailwindCSS skonfigurowany (tailwind.config.js istnieje)
 - [ ] Shadcn/ui zainstalowany
 - [ ] Komponenty UI dostępne w `src/components/ui/`
@@ -208,7 +207,6 @@ export const useChatStore = create<ChatState>((set) => ({
 **Plik**: `src/services/chatService.ts`
 
 ```typescript
-import axios from "axios";
 import { ChatRequest, ChatResponse } from "../types/chat";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -216,16 +214,24 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 export const chatService = {
   /**
    * Wysyła wiadomość do rzeczywistego backendu
+   * Używa Fetch API (MVP)
+   * TODO: Zamienić na Axios w Sprint 2+
    */
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
     try {
-      const response = await axios.post(`${API_URL}/api/chat`, request, {
+      const response = await fetch(`${API_URL}/api/chat`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(request),
       });
 
-      return response.data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
     } catch (error) {
       console.error("API Error:", error);
       throw new Error("Nie udało się wysłać wiadomości do serwera");
@@ -775,9 +781,11 @@ build
 | 1.10: Env Vars     | 0.5h     | [ ]    |
 | 1.11: Testing      | 1h       | [ ]    |
 | 1.12: Git          | 0.5h     | [ ]    |
-| **ŁĄCZNIE**        | **~11h** |        |
+| **ŁĄCZNIE**        | **~10h** |        |
 
 **Rekomendacja**: 2-3 dni po 4-5 godzin pracy
+
+**Notatka**: Czas zmniejszył się o ~1h dzięki usunięciu Axios. Axios dodamy w Sprint 2+!
 
 ---
 
@@ -841,4 +849,12 @@ npx shadcn-ui@latest add [komponent]
 - [Vite Docs](https://vitejs.dev)
 - [TailwindCSS Docs](https://tailwindcss.com)
 - [Shadcn/ui Docs](https://ui.shadcn.com)
+- [Zustand Docs](https://github.com/pmndrs/zustand)
+- [Fetch API Docs](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+
+### Przyszłość - Sprint 2+
+
+- **Axios**: Zainstalujemy w Sprint 2, gdy będziesz mieć backend
+- **Custom Hooks**: Możemy tworzyć hooki dla logiki biznesowej
+- **React Query / TanStack Query**: Opcjonalnie do zarządzania cache'em API (Sprint 3+)
 - [Zustand Docs](https://github.com/pmndrs/zustand)
