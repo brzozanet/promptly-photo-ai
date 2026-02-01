@@ -217,7 +217,9 @@ Organizacja projektu zgodnie z planem (w folderze `frontend/src/`).
 
 ```bash
 # Utwórz strukturę folderów w src/
-mkdir -p src/components
+mkdir -p src/components/layout
+mkdir -p src/components/chat
+mkdir -p src/pages
 mkdir -p src/store
 mkdir -p src/types
 mkdir -p src/services
@@ -230,22 +232,32 @@ promptly-photo-ai/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── ChatWindow.tsx      (utworzysz w Task 1.10)
-│   │   │   ├── ChatInput.tsx       (utworzysz w Task 1.9)
-│   │   │   ├── MessageList.tsx     (utworzysz w Task 1.8)
-│   │   │   ├── Message.tsx         (utworzysz w Task 1.7)
+│   │   │   ├── layout/              (utworzysz w Task 1.8)
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Layout.tsx
+│   │   │   │   └── Sidebar.tsx
+│   │   │   ├── chat/                (utworzysz w Task 1.9-1.11)
+│   │   │   │   ├── Message.tsx
+│   │   │   │   ├── MessageList.tsx
+│   │   │   │   ├── ChatInput.tsx
+│   │   │   │   └── ChatWindow.tsx
 │   │   │   └── ui/                 (shadcn/ui komponenty)
 │   │   │       ├── button.tsx
 │   │   │       ├── input.tsx
 │   │   │       ├── textarea.tsx
 │   │   │       ├── scroll-area.tsx
 │   │   │       └── spinner.tsx
+│   │   ├── pages/               (utworzysz w Task 1.12)
+│   │   │   ├── HomePage.tsx
+│   │   │   ├── AboutPage.tsx
+│   │   │   ├── HowItWorksPage.tsx
+│   │   │   └── ContactPage.tsx
 │   │   ├── store/
-│   │   │   └── chatStore.ts        (utworzysz w Task 1.6)
+│   │   │   └── chatStore.ts        (utworzysz w Task 1.7)
 │   │   ├── types/
-│   │   │   └── chat.ts             (utworzysz w Task 1.5)
+│   │   │   └── chat.ts             (utworzysz w Task 1.6)
 │   │   ├── services/
-│   │   │   └── chatService.ts      (utworzysz w Task 1.12)
+│   │   │   └── chatService.ts      (utworzysz w Task 1.14)
 │   │   ├── App.tsx
 │   │   ├── main.tsx
 │   │   └── index.css
@@ -255,12 +267,33 @@ promptly-photo-ai/
 └── backend/                        (Sprint 2)
 ```
 
-- [ ] Wszystkie foldery utworzone
+- [ ] Wszystkie foldery utworzone (components/layout, components/chat, pages)
 - [ ] Pliki `ui/` znajdują się w `components/ui/`
 
 ---
 
-## 🎯 Task 1.5: Typy TypeScript (0.5h)
+## 🎯 Task 1.5: Instalacja React Router (0.25h)
+
+### Cel
+
+Dodanie routingu dla nawigacji między stronami (Home, About, How It Works, Contact).
+
+### Kroki
+
+**Upewnij się, że jesteś w folderze `frontend/`**:
+
+```bash
+npm install react-router-dom
+```
+
+### Sprawdzenie
+
+- [ ] `react-router-dom` zainstalowany w `package.json`
+- [ ] Brak błędów instalacji
+
+---
+
+## 🎯 Task 1.6: Typy TypeScript (0.5h)
 
 ### Cel
 
@@ -294,7 +327,7 @@ export interface ChatState {
 
 ---
 
-## 🎯 Task 1.6: Zustand Store (0.5h)
+## 🎯 Task 1.7: Zustand Store (0.5h)
 
 ### Cel
 
@@ -343,13 +376,135 @@ export const useChatStore = create<ChatState>((set) => ({
 
 ---
 
-## 🎯 Task 1.7: Komponenty UI - Message (0.5h)
+## 🎯 Task 1.8: Layout Components (Header, Layout, Sidebar) (0.75h)
 
 ### Cel
 
-Komponent wyświetlający jedną wiadomość.
+Stworzenie podstawowych komponentów układu strony przypominających ChatGPT.
 
-### Plik: `frontend/src/components/Message.tsx`
+### Plik 1: `frontend/src/components/layout/Header.tsx`
+
+```typescript
+import { Link } from 'react-router-dom';
+
+export function Header() {
+  return (
+    <header className="bg-white border-b border-gray-200 px-6 py-4">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        <Link to="/" className="flex items-center gap-2">
+          <h1 className="text-xl font-bold text-blue-600">📸 Promptly Photo AI</h1>
+        </Link>
+
+        <nav className="flex gap-6">
+          <Link to="/about" className="text-gray-700 hover:text-blue-600 transition">
+            O projekcie
+          </Link>
+          <Link to="/how-it-works" className="text-gray-700 hover:text-blue-600 transition">
+            Jak działa
+          </Link>
+          <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition">
+            Kontakt
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+}
+```
+
+### Plik 2: `frontend/src/components/layout/Sidebar.tsx`
+
+```typescript
+export function Sidebar() {
+  return (
+    <aside className="w-64 bg-gray-50 border-r border-gray-200 p-4">
+      <div className="mb-4">
+        <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+          + Nowa rozmowa
+        </button>
+      </div>
+
+      <div className="text-sm text-gray-500">
+        <p>Historia rozmów</p>
+        <p className="mt-2 text-xs italic">Dostępne w Phase 2</p>
+      </div>
+    </aside>
+  );
+}
+```
+
+### Plik 3: `frontend/src/components/layout/Layout.tsx`
+
+```typescript
+import { Outlet } from 'react-router-dom';
+import { Header } from './Header';
+import { Sidebar } from './Sidebar';
+
+export function Layout() {
+  return (
+    <div className="flex flex-col h-screen">
+      <Header />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
+        <main className="flex-1 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}
+```
+
+### Sprawdzenie
+
+- [ ] 3 pliki utworzone bez błędów
+- [ ] Header wyświetla logo i menu nawigacyjne
+- [ ] Sidebar zawiera placeholder "Nowa rozmowa"
+- [ ] Layout łączy Header + Sidebar + content area
+
+---
+
+## 📐 Hierarchia Komponentów Czatu
+
+Przed przystąpieniem do implementacji komponentów czatu, zrozum ich hierarchię:
+
+```
+┌─────────────────────────────────────────┐
+│  ChatWindow.tsx                         │  ← Główny kontener czatu
+│  ┌───────────────────────────────────┐  │
+│  │ MessageList.tsx                   │  │  ← Scroll area + wrapper
+│  │ ┌─────────────────────────────┐   │  │
+│  │ │ Message.tsx (user)          │   │  │  ← Pojedynczy bąbelek
+│  │ └─────────────────────────────┘   │  │
+│  │ ┌─────────────────────────────┐   │  │
+│  │ │ Message.tsx (assistant)     │   │  │  ← Kolejny bąbelek
+│  │ └─────────────────────────────┘   │  │
+│  └───────────────────────────────────┘  │
+│  ┌───────────────────────────────────┐  │
+│  │ ChatInput.tsx                     │  │  ← Textarea + Button
+│  │ [Textarea] [Send Button]         │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
+```
+
+**Flow:**
+
+1. **ChatWindow** - kontener główny, zarządza stanem i logiką
+2. **MessageList** - renderuje tablicę wiadomości, auto-scroll
+3. **Message** - pojedynczy bąbelek (user = prawo/niebieski, AI = lewo/szary)
+4. **ChatInput** - textarea + button, obsługa Enter/Shift+Enter
+
+---
+
+## 🎯 Task 1.9: Chat Components - Message & MessageList (0.75h)
+
+### Cel
+
+Komponenty do wyświetlania wiadomości: **Message** (pojedynczy bąbelek) i **MessageList** (scroll area z listą).
+
+**Hierarchia**: MessageList renderuje wiele komponentów Message w pętli.
+
+### Plik 1: `frontend/src/components/chat/Message.tsx`
 
 ```typescript
 import { Message as MessageType } from '../types/chat';
@@ -386,24 +541,27 @@ export function Message({ message }: MessageProps) {
 
 ### Sprawdzenie
 
-- [ ] Komponent kompiluje się bez błędów
-- [ ] Przygotowany do wyświetlania pojedynczych wiadomości
+- [ ] 2 komponenty utworzone bez błędów
+- [ ] Message wyświetla pojedyncze wiadomości
+- [ ] MessageList renderuje listę wiadomości z auto-scroll
 
 ---
 
-## 🎯 Task 1.8: Komponenty UI - MessageList (0.5h)
+## 🎯 Task 1.10: Chat Components - ChatInput (0.5h)
 
 ### Cel
 
-Lista wszystkich wiadomości w czacie.
+Input użytkownika: **textarea** (wieloliniowy) + **button** wyślij.
 
-### Plik: `frontend/src/components/MessageList.tsx`
+**Funkcje**: Enter = wyślij, Shift+Enter = nowa linia, disabled podczas ładowania.
+
+### Plik 2: `frontend/src/components/chat/MessageList.tsx`
 
 ```typescript
 import { useRef, useEffect } from 'react';
-import { Message as MessageType } from '../types/chat';
+import { Message as MessageType } from '../../types/chat';
 import { Message } from './Message';
-import { ScrollArea } from './ui/scroll-area';
+import { ScrollArea } from '../ui/scroll-area';
 
 interface MessageListProps {
   messages: MessageType[];
@@ -505,13 +663,20 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
 
 ### Sprawdzenie
 
-- [ ] Input pozwala pisać
-- [ ] Przycisk jest aktywny tylko gdy jest tekst
-- [ ] Enter wysyła wiadomość (Shift+Enter = nowa linia)
+- [ ] Input po1: Chat Components - ChatWindow (0.5h)
 
----
+### Cel
 
-## 🎯 Task 1.10: Komponenty UI - ChatWindow (0.5h)
+**Główny kontener czatu**: łączy MessageList (góra) + ChatInput (dół).
+
+**Odpowiedzialność**:
+
+- Układ komponentów (flex column)
+- Przekazywanie danych i funkcji między komponentami
+- Logika wysyłania wiadomości (mockowana w MVP)
+- Header czatu z tytułem
+
+### Plik: `frontend/src/components/chathatWindow (0.5h)
 
 ### Cel
 
@@ -559,12 +724,13 @@ export function ChatWindow() {
       <div className="bg-linear-to-r from-purple-600 to-blue-600 text-white p-4">
         <h1 className="text-xl font-bold">📸 Promptly Photo - AI Photography Assistant</h1>
         <p className="text-sm opacity-90">Zapytaj o fotografię, kompozycję, sprzęt...</p>
-      </div>
+      ChatWindow renderuje MessageList + ChatInput
+- [ ] Mock wysyłania wiadomości działa
+- [ ] Layout: lista wiadomości na górze, input na dole
 
-      <MessageList messages={messages} />
+---
 
-      <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
-    </Card>
+## 🎯 Task 1.12: Pages (About, How It Works, Contact) (0.7
   );
 }
 ```

@@ -78,12 +78,22 @@ promptly-photo-ai/
 ├── frontend/                 # Aplikacja React (Vite)
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── ChatWindow.tsx
-│   │   │   ├── ChatInput.tsx
-│   │   │   ├── MessageList.tsx
-│   │   │   ├── Message.tsx
+│   │   │   ├── layout/
+│   │   │   │   ├── Header.tsx         (logo + navigation menu)
+│   │   │   │   ├── Layout.tsx         (wrapper całej aplikacji)
+│   │   │   │   └── Sidebar.tsx        (lewy panel, placeholder Phase 1)
+│   │   │   ├── chat/
+│   │   │   │   ├── ChatWindow.tsx     (kontener: łączy MessageList + ChatInput)
+│   │   │   │   ├── MessageList.tsx    (scroll area z listą Message)
+│   │   │   │   ├── Message.tsx        (pojedynczy bąbelek wiadomości)
+│   │   │   │   └── ChatInput.tsx      (textarea + button wyślij)
 │   │   │   └── ui/
 │   │   │       └── (komponenty shadcn/ui - auto-generated)
+│   │   ├── pages/
+│   │   │   ├── HomePage.tsx       (główna strona z czatem)
+│   │   │   ├── AboutPage.tsx      (/about)
+│   │   │   ├── HowItWorksPage.tsx (/how-it-works)
+│   │   │   └── ContactPage.tsx    (/contact)
 │   │   ├── store/
 │   │   │   └── chatStore.ts (Zustand)
 │   │   ├── types/
@@ -129,14 +139,20 @@ promptly-photo-ai/
 - [x] Task 1.1: Inicjalizacja React + Vite (0.5h)
 - [x] Task 1.2: Instalacja TailwindCSS (0.5h)
 - [x] Task 1.3: Instalacja Shadcn/ui (0.5h)
-- [ ] Task 1.4: Struktura folderów (0.5h)
-- [ ] Task 1.5: Typy TypeScript (`chat.ts`) (0.5h)
-- [ ] Task 1.6: Zustand Store (0.5h)
-- [ ] Task 1.7-1.11: Komponenty UI (Message, MessageList, ChatInput, ChatWindow, App.tsx) (2.5h)
-- [ ] Task 1.12: Chat Services - template (0.5h)
-- [ ] Task 1.13: Environment Variables (0.25h)
-- [ ] Task 1.14: Testing & Polish (0.5h)
-- [ ] Task 1.15: Deployment Setup - Vercel (0.5h)
+- [ ] Task 1.4: Struktura folderów (components/layout, components/chat, pages) (0.5h)
+- [ ] Task 1.5: Instalacja React Router (0.25h)
+- [ ] Task 1.6: Typy TypeScript (`chat.ts`) (0.5h)
+- [ ] Task 1.7: Zustand Store (0.5h)
+- [ ] Task 1.8: Layout Components (Header, Layout, Sidebar placeholder) (0.75h)
+- [ ] Task 1.9: Chat Components - Message & MessageList (0.75h)
+- [ ] Task 1.10: Chat Components - ChatInput (0.5h)
+- [ ] Task 1.11: Chat Components - ChatWindow (połączenie wszystkiego) (0.5h)
+- [ ] Task 1.12: Pages (About, How It Works, Contact) (0.75h)
+- [ ] Task 1.13: Routing & App.tsx - finalna integracja (0.5h)
+- [ ] Task 1.14: Chat Services - template (0.5h)
+- [ ] Task 1.15: Environment Variables (0.25h)
+- [ ] Task 1.16: Testing & Polish (0.5h)
+- [ ] Task 1.17: Deployment Setup - Vercel (0.5h)
 
 **Output**: Mockowany czat działa lokalnie, gotowy na integrację z backendem
 
