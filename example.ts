@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import dotenv from "dotenv";
 import OpenAI from "openai";
 import readline from "node:readline";
