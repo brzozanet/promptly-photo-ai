@@ -138,14 +138,14 @@ import "./index.css";
 
 ### Sprawdzenie
 
-- [ ] Pliki `tailwind.config.js` i `postcss.config.js` zostały utworzone
-- [ ] Plik `src/index.css` ma dyrektywy Tailwind:
+- [x] Pliki `tailwind.config.js` i `postcss.config.js` zostały utworzone
+- [x] Plik `src/index.css` ma dyrektywy Tailwind:
   ```css
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
   ```
-- [ ] `src/main.tsx` importuje `index.css`
+- [x] `src/main.tsx` importuje `index.css`
 
 ### Ćwiczenie testowe
 
@@ -161,7 +161,7 @@ export default function App() {
 }
 ```
 
-- [ ] Po refresh strony tło jest niebieskie, tekst biały i wyśrodkowany
+- [x] Po refresh strony tło jest niebieskie, tekst biały i wyśrodkowany
 
 ---
 
