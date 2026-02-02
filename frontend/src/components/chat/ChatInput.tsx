@@ -4,9 +4,10 @@ import { Textarea } from "../ui/textarea";
 export function ChatInput() {
   return (
     <>
-      <h2>ChatInput</h2>
-      <Textarea />
-      <Button />
+      <div className="border-t p-4 flex gap-2">
+        <Textarea className="min-h-[80px] resize-none" />
+        <Button className="self-end" />
+      </div>
     </>
   );
 }

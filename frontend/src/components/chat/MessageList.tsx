@@ -1,10 +1,28 @@
+import { ScrollArea } from "../ui/scroll-area";
 import { Message } from "./Message";
 
 export function MessageList() {
   return (
     <>
-      <h2>MessageList</h2>
-      <Message />
+      <ScrollArea className="h-full px-4 py-6">
+        <ul className="space-y-4">
+          <li>
+            <Message />
+          </li>
+          <li>
+            <Message />
+          </li>
+          <li>
+            <Message />
+          </li>
+          <li>
+            <Message />
+          </li>
+          <li>
+            <Message />
+          </li>
+        </ul>
+      </ScrollArea>
     </>
   );
 }
