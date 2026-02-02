@@ -4,9 +4,17 @@ export function Header() {
       <div>
         <div>Promptly Photo AI</div>
         <nav>
-          <a href="#">O projekcie</a>
-          <a href="#">Jak działa</a>
-          <a href="#">Kontakt</a>
+          <ul>
+            <li>
+              <a href="#">O projekcie</a>
+            </li>
+            <li>
+              <a href="#">Jak działa</a>
+            </li>
+            <li>
+              <a href="#">Kontakt</a>
+            </li>
+          </ul>
         </nav>
       </div>
     </>

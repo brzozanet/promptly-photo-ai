@@ -1,8 +1,10 @@
+import { ChatWindow } from "@/components/chat/ChatWindow";
+
 export function HomePage() {
   return (
     <>
-      <h1>HomePage</h1>
-      <p>ChatWindow</p>
+      <h1>Homepage</h1>
+      <ChatWindow />
     </>
   );
 }

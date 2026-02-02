@@ -1,7 +1,10 @@
 export function Message() {
   return (
     <>
-      <h1>Message</h1>
+      <h3>Message</h3>
+      <h3>Message</h3>
+      <h3>Message</h3>
+      <h3>Message</h3>
     </>
   );
 }
