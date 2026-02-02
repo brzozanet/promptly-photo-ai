@@ -501,33 +501,28 @@ Komponenty do wyświetlania wiadomości: **Message** (pojedynczy bąbelek) i **M
 ### Plik 1: `frontend/src/components/chat/Message.tsx`
 
 ```typescript
-import { Message as MessageType } from '../types/chat';
-import { Card } from './ui/card';
+import type { Message as MessageType } from '@/types/chat';
 
-interface MessageProps {
-  message: MessageType;
-}
-
-export function Message({ message }: MessageProps) {
-  const isUser = message.role === 'user';
+export function Message({ role, content, timestamp }: MessageType) {
+  const isUser = role === 'user';
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
-      <Card
-        className={`max-w-xs lg:max-w-md px-4 py-2 ${
+      <div
+        className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
           isUser
-            ? 'bg-blue-500 text-white rounded-br-none'
-            : 'bg-gray-200 text-black rounded-bl-none'
+            ? 'ml-auto bg-primary text-primary-foreground'
+            : 'mr-auto bg-muted text-foreground'
         }`}
       >
-        <p className="text-sm">{message.content}</p>
-        <span className="text-xs opacity-70 mt-1 block">
-          {message.timestamp.toLocaleTimeString('pl-PL', {
+        <p>{content}</p>
+        <span className="text-[10px] text-muted-foreground mt-1 block">
+          {timestamp.toLocaleTimeString('pl-PL', {
             hour: '2-digit',
             minute: '2-digit',
           })}
         </span>
-      </Card>
+      </div>
     </div>
   );
 }
