@@ -390,8 +390,8 @@ export const useChatStore = create<ChatState>((set) => ({
 
 ### Sprawdzenie
 
-- [ ] Plik utworzony bez błędów
-- [ ] Store eksportuje się prawidłowo
+- [x] Plik utworzony bez błędów
+- [x] Store eksportuje się prawidłowo
 
 ---
 
