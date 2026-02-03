@@ -4,14 +4,13 @@ import { Message } from "./Message";
 export function MessageList() {
   const messageMockup = {
     id: "1",
-    content:
-      "Saepe sit vel iste id est doloribus. Fugiat aliquid repellendus rerum blanditiis sunt sunt fugiat et. Possimus et qui autem harum molestiae architecto doloribus. Atque ut rem. Aut facilis placeat velit ratione et harum. Aut at animi nemo explicabo eum sunt dolorem voluptatum. Saepe dolorum in illum voluptatem. Consequuntur tempora ut odio rerum sit neque voluptatem consectetur.",
-    timestamp: new Date(),
+    content: `Saepe sit vel iste id est doloribus. Fugiat aliquid repellendus rerum blanditiis sunt sunt fugiat et. Possimus et qui autem harum molestiae architecto doloribus. Atque ut rem. Aut facilis placeat velit ratione et harum. Aut at animi nemo explicabo eum sunt dolorem voluptatum. Saepe dolorum in illum voluptatem. Consequuntur tempora ut odio rerum sit neque voluptatem consectetur.`,
+    timestamp: "Tue Feb 03 2026 18:18:53",
   };
 
   return (
     <>
-      <ScrollArea className="h-full px-4 py-6">
+      <ScrollArea className="h-full px-4 py-6 bg-sky-500/10">
         <ul className="space-y-4">
           <li>
             <Message
@@ -41,6 +40,14 @@ export function MessageList() {
             <Message
               id={messageMockup.id}
               role="assistant"
+              content={messageMockup.content}
+              timestamp={messageMockup.timestamp}
+            />
+          </li>
+          <li>
+            <Message
+              id={messageMockup.id}
+              role="user"
               content={messageMockup.content}
               timestamp={messageMockup.timestamp}
             />

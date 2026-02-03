@@ -1,21 +1,36 @@
-import type { Message as MessageType } from "@/types/chat";
-import iconAssitant from "../../assets/icon-assistant.svg";
+import type { Message } from "@/types/chat";
+// import iconAssitant from "../../assets/icon-assistant.svg";
 import iconPromptly from "../../assets/icon-promptly.svg";
 import iconUser from "../../assets/icon-user.svg";
 
-export function Message({ id, role, content, timestamp }: MessageType) {
+export function Message({ id, role, content, timestamp }: Message) {
+  const isUser = role === "user";
+  const avatar = isUser ? iconUser : iconPromptly;
+
   return (
-    <>
-      <div>
-        <div>{role}</div>
-        <div>
-          <p>
-            {id}
-            {content}
-          </p>
-          <p>{timestamp}</p>
-        </div>
+    <div
+      className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
+    >
+      {!isUser && (
+        <img src={avatar} alt="assistant" className="h-8 w-8 rounded-full" />
+      )}
+
+      <div
+        className={`max-w-[75%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
+          isUser
+            ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-primary-foreground"
+            : "bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
+        }`}
+      >
+        <p className="whitespace-pre-wrap text-left">{content}</p>
+        <p className="mt-1 text-[10px] text-muted-foreground text-left">
+          {timestamp}
+        </p>
       </div>
-    </>
+
+      {isUser && (
+        <img src={avatar} alt="user" className="h-8 w-8 rounded-full" />
+      )}
+    </div>
   );
 }
