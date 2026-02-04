@@ -27,7 +27,7 @@ export function Message({ id, role, content, timestamp }: Message) {
         }`}
       >
         <p className="whitespace-pre-wrap text-left">{content}</p>
-        <p className="mt-1 text-[10px] text-muted-foreground text-left">
+        <p className="mt-2 text-[11px] whitespace-pre-wrap text-left">
           {timestamp}
         </p>
       </div>
