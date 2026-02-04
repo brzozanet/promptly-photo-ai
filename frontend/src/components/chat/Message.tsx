@@ -21,7 +21,7 @@ export function Message({ role, content, timestamp }: Message) {
       <div
         className={`max-w-[75%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
           isUser
-            ? "bg-linear-to-r from-gray-700 via-gray-600 to-gray-400 text-primary-foreground"
+            ? "bg-linear-to-r from-gray-600 via-gray-650 to-gray-600 text-primary-foreground"
             : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
         }`}
       >
