@@ -17,7 +17,7 @@ export function MessageList() {
     },
     [
       // TODO: tutaj dolecowo messages
-    ],
+    ]
   );
 
   return (
@@ -26,22 +26,6 @@ export function MessageList() {
         Saepe sit vel iste id est doloribus...
       </h2>
       <ul className="space-y-4 px-4 mb-12">
-        <li>
-          <Message
-            id={messageMockup.id}
-            role="user"
-            content={messageMockup.content}
-            timestamp={messageMockup.timestamp}
-          />
-        </li>
-        <li>
-          <Message
-            id={messageMockup.id}
-            role="assistant"
-            content={messageMockup.content}
-            timestamp={messageMockup.timestamp}
-          />
-        </li>
         <li>
           <Message
             id={messageMockup.id}
