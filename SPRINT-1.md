@@ -530,9 +530,9 @@ export function Message({ role, content, timestamp }: MessageType) {
 
 ### Sprawdzenie
 
-- [ ] 2 komponenty utworzone bez błędów
-- [ ] Message wyświetla pojedyncze wiadomości
-- [ ] MessageList renderuje listę wiadomości z auto-scroll
+- [x] 2 komponenty utworzone bez błędów
+- [x] Message wyświetla pojedyncze wiadomości
+- [x] MessageList renderuje listę wiadomości z auto-scroll
 
 ---
 
