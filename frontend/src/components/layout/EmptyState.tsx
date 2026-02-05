@@ -3,7 +3,7 @@ import { ChatInput } from "../chat/ChatInput";
 
 export function EmptyState() {
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-200px)] w-full max-w-5xl flex-col justify-center">
+    <div className="mx-auto flex min-h-[calc(90vh-260px)] w-full max-w-5xl flex-col justify-center">
       <h1 className="text-3xl ml-4 text-white text-left mb-6 font-light">
         Porozmawiaj z{" "}
         <span className="bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold">
@@ -16,10 +16,17 @@ export function EmptyState() {
 
         <Typewriter
           words={[
+            "ustawić aparat dla początkujących?",
+            "robić ostre zdjęcia bez poruszenia?",
+            "fotografować ludzi w plenerze?",
+            "upiększyć zdjęcia z wakacji?",
+            "uzyskać rozmyte tło na zdjęciu?",
+            "poprawnie ustawić balans bieli?",
+            "robić zdjęcia w ostrym słońcu?",
+            "fotografować zwierzęta w ruchu?",
             "fotografować krajobraz?",
             "robić zdjęcia nocne?",
             "dbać o aparat zimą?",
-            "upiększyć zdjęcia z wakacji?",
             "używać statywu?",
             "ustawiać przysłonę do portretu?",
             "szukać inspiracji do zdjęć?",

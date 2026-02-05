@@ -7,6 +7,7 @@ import { loremIpsum } from "lorem-ipsum";
 
 export function ChatInput() {
   const [input, setInput] = useState<string>("");
+  const messages = useChatStore((state) => state.messages);
   const { addMessage } = useChatStore();
   const isLoading = false;
 
@@ -36,6 +37,18 @@ export function ChatInput() {
     }, 2000);
   };
 
+  const lastUserMessage = messages
+    .filter((message) => message.role === "user")
+    .at(-1);
+
+  const isDuplicate = input.trim() === lastUserMessage?.content;
+
+  const isInputValid =
+    input.trim().length >= 3 &&
+    input.trim().length <= 5000 &&
+    !isLoading &&
+    !isDuplicate;
+
   return (
     <>
       <form className="p-4 flex gap-2" onSubmit={sendPrompt}>
@@ -48,6 +61,7 @@ export function ChatInput() {
         />
         <Button
           className="w-24 bg-blue-500 shadow-lg shadow-blue-500/50 px-4 py-2 rounded-md font-bold self-end"
+          disabled={!isInputValid}
           type="submit"
         >
           {isLoading ? "Czekam..." : "Wyślij"}
