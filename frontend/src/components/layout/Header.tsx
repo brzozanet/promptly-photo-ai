@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { useChatStore } from "@/store/chatStore";
 import iconPromptly from "../../assets/icon-promptly.svg";
 
 export function Header() {
+  const { clearMessages } = useChatStore();
+  const handleNewChatButtonClick = () => {
+    clearMessages();
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% px-6 py-4 w-full shadow-2xl">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
@@ -17,11 +23,12 @@ export function Header() {
         <nav>
           <ul className="flex flex-row gap-6 items-center font-bold">
             <li>
-              <NavLink to="#">
-                <div className="bg-blue-500 shadow-lg shadow-blue-500/50 px-4 py-2 rounded-md text-white">
-                  Nowa rozmowa
-                </div>
-              </NavLink>
+              <button
+                onClick={handleNewChatButtonClick}
+                className="bg-blue-500 shadow-lg shadow-blue-500/50 px-4 py-2 rounded-md text-white"
+              >
+                Nowa rozmowa
+              </button>
             </li>
             <li>
               <NavLink to="#">O projekcie</NavLink>
