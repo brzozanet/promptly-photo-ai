@@ -81,16 +81,17 @@ export function Header() {
             ) : (
               ""
             )}
-
-            <li>
-              <NavLink to="#">O projekcie</NavLink>
-            </li>
             <li>
               <NavLink to="how.html">Jak to działa?</NavLink>
             </li>
+            {/* <li>
+              <NavLink to="#">O projekcie</NavLink>
+            </li> */}
           </ul>
         </nav>
       </div>
     </header>
   );
 }
+
+// TODO: add About page
