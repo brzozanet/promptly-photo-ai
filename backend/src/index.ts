@@ -35,7 +35,7 @@ app.get("/health", (request, response) => {
 // NOTE: Start serwera
 
 app.listen(PORT, () => {
-  console.log(`📸 Photography AI Assistant - Backend Ready`);
+  console.log(`📸 Promptly Photo AI Assistant - Backend Ready`);
   console.log(`🚀 Backend proxy nasłuchuje na http://localhost:${PORT}`);
   console.log(`🔗 Health check: http://localhost:${PORT}/health`);
 });
